@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whac a Mole</title>
+    <link rel="stylesheet" href="game2.css">
+    <style>
+        
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 150px; /* Adjust the width as needed */
+    height: 100px; /* Adjust the height as needed */
+    background-color: #fefefe;
+    border: 1px solid #888;
+    border-radius: 5px;
+}
+
+.modal-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+    <nav>
+        <button id="view-score-button" onclick="redirectToResultPage()">View Score</button>
+
+    </nav>
+    <div class="container">
+        <button class="back-button"><a href="/listen and speak game/game-1.html">Back</a></button>
+        <!-- ##add link## -->
+        <button class="next-button"><a href="/game-thumbnail/game-dashboard.html">Finish</a></button>
+         <!-- ##add link## -->
+        <div class="loading">
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+            <div class="obj"></div>
+        </div>
+        <h1 id="target-heading"></h1>
+        <div id="score-board">
+            <h2 id="score">SCORE: 0</h2>
+            <h2 id="accuracy">ACCURACY: 0%</h2>
+            <h2 id="timer">Time Left: 30s</h2>
+        </div>
+        <button id="start-button">Start</button>
+        <!-- 3x3 -->
+        <div id="board">
+        </div>
+        <!-- Modal -->
+        <div id="result-modal" class="modal">
+            <div class="modal-content" id="modal-content">
+            </div>
+        </div>
+    </div>
+    <script src="game2.js"></script>
+</body>
+</html>

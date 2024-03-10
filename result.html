@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        p {
+            text-align: center;
+            font-size: 18px;
+            color: #555;
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        button {
+            margin: 20px;
+            padding: 15px 30px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: background-color 0.3s ease;
+            animation: slideIn 1s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Game Results</h1>
+    <h2>Individual Game Sessions</h2>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Accuracy (%)</th>
+            <th>Score</th>
+        </tr>
+        <!-- JavaScript to populate table with previous game sessions -->
+        <script>
+            const gameSessions = JSON.parse(localStorage.getItem('gameSessions')) || [];
+
+            gameSessions.forEach(session => {
+                const dateTime = new Date(session.timestamp);
+                const date = dateTime.toLocaleDateString();
+                const time = dateTime.toLocaleTimeString();
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${date}</td>
+                    <td>${time}</td>
+                    <td>${session.accuracy}</td>
+                    <td>${session.score}</td>
+                `;
+                document.querySelector('table').appendChild(row);
+            });
+        </script>
+    </table>
+
+    <h2>Average Accuracy</h2>
+    <p>
+        <!-- JavaScript to calculate average accuracy and display appropriate statement -->
+        <script>
+            const totalAccuracy = gameSessions.reduce((acc, session) => acc + parseFloat(session.accuracy), 0);
+            const averageAccuracy = totalAccuracy / gameSessions.length;
+
+            let statement;
+            if (averageAccuracy >= 80) {
+                statement = "Great job! You're consistently performing at a high level.";
+            } else if (averageAccuracy >= 60) {
+                statement = "Well done! You're doing well, but there's always room for improvement.";
+            } else if (averageAccuracy >= 40) {
+                statement = "Not bad! Keep practicing to improve your accuracy.";
+            } else {
+                statement = "Keep trying! You'll get better with practice.";
+            }
+
+            document.write(`Your average accuracy across all previous games: ${averageAccuracy.toFixed(2)}%. ${statement}`);
+        </script>
+    </p>
+
+    <!-- Buttons to restart or continue the game -->
+    <div class="button-container">
+        <button onclick="restartGame()">Restart Game</button>
+        <button onclick="continueGame()">Continue Game</button>
+    </div>
+
+    <script>
+        function restartGame() {
+            // Remove all game sessions from local storage
+            localStorage.removeItem('gameSessions');
+
+            // Redirect to game.html to restart the game
+            window.location.href = 'game2.html';
+        }
+
+        function continueGame() {
+            // Redirect to game.html to continue the game
+            window.location.href = 'game2.html';
+        }
+    </script>
+</body>
+</html>
